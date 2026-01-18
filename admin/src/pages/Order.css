@@ -1,0 +1,130 @@
+
+.order-page {
+
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f6fa;
+  min-height: 100vh;
+}
+
+.order-page h3 {
+  text-align: center;
+  margin-bottom: 35px;
+  color: #2f3640;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* Orders wrapper */
+.orders-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+}
+
+/* Individual order card */
+.order-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 25px;
+  width: 380px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.order-card:hover {
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Order icon */
+.order-icon {
+  width: 60px;
+  height: 60px;
+}
+
+/* Card content */
+.order-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Order items */
+.order-items {
+  margin-bottom: 14px;
+  font-size: 15px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Customer info */
+.customer-info p {
+  margin: 5px 0;
+  font-size: 15px;
+  color: #333;
+  line-height: 1.5;
+}
+
+.customer-info b {
+  color: #2f3640;
+  font-weight: 600;
+}
+
+/* Order details */
+.order-details {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #2f3640;
+}
+
+/* Status dropdown */
+.order-status-select {
+  margin-top: 15px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid #dcdde1;
+  background-color: #f1f2f6;
+  font-size: 15px;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.order-status-select:hover {
+  background-color: #e4e6eb;
+}
+
+/* No orders message */
+.no-orders {
+  text-align: center;
+  color: #718093;
+  font-size: 17px;
+  margin-top: 30px;
+  font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 420px) {
+  .order-card {
+    width: 90%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .order-content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .order-details {
+    flex-direction: column;
+    gap: 6px;
+  }
+}

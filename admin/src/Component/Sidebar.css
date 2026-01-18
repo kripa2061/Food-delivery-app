@@ -1,0 +1,38 @@
+.sidebar {
+  width: 150px;
+  background-color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-right: 2px solid #ccc;
+  height: 100vh;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 10px;
+  transition: background-color 0.2s ease;
+  border: 2px solid #ccc;
+ width: 150px;
+ border-right: none;
+ text-decoration: none;
+}
+
+.sidebar-item:hover {
+  background-color: rgba(255, 40, 2, 0.634);
+}
+
+.sidebar-item img {
+  width: 24px;
+  height: 24px;
+}
+
+.sidebar-item p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}

@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+body {
+  font-family: 'Poppins';
+}
+.footer {
+  background-color: rgb(35, 33, 33);
+  margin-top: 20px;
+  color: white;
+  min-height: 20vw;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.desc,
+.about,
+.contact {
+  margin: 20px;
+  max-width: 400px;
+  flex: 1 1 300px;
+
+}
+.desc .footer-logo{
+    height: 30px;
+    width: 40px;
+    
+  
+}
+.footer-adjust{
+    display: flex;
+    
+}
+.desc img {
+    flex-direction: column;
+    justify-content: space-around;
+  margin-bottom: 15px;
+  max-width: 100%;
+  height: auto;
+}
+.desc h3{
+    color: tomato;
+    
+}
+
+.desc h3,
+.about h3,
+.contact h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.desc p {
+  margin: 20px 0;
+  line-height: 1.6;
+  max-width: 100%;
+}
+
+.about ul,
+.contact ul {
+  list-style: none;
+  padding: 0;
+}
+
+.about ul li,
+.contact ul li {
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.about ul li:hover,
+.contact ul li:hover {
+  color: #ff6f61;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .desc,
+  .about,
+  .contact {
+    max-width: 100%;
+    margin: 10px 0;
+  }
+}
+.footer-copyright{
+  text-align: center;
+}

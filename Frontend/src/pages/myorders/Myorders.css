@@ -1,0 +1,111 @@
+/* Container for all orders */
+.myorders {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  min-height: 80vh;
+}
+
+/* Each order card as horizontal row */
+.order-card {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.order-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+/* Parcel image */
+.order-icon {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Content wrapper inside card */
+.order-content {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  flex-wrap: nowrap; /* everything stays in one row */
+  flex: 1;
+}
+
+/* Horizontal items */
+.order-items {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+/* Each food item block */
+.food-item {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* spacing between name, x, quantity */
+  background-color: #f1f1f1;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+/* Amount */
+.order-amount {
+  font-weight: 600;
+  color: #333;
+  min-width: 100px;
+}
+
+/* Status */
+.order-status {
+  font-weight: 350;
+  min-width: 80px;
+}
+
+/* Status dot */
+.order-status span {
+  color: green; /* dynamic if needed */
+  margin-right: 4px;
+  font-size: 12px;
+}
+
+/* Track button */
+.order-content button {
+  padding: 6px 12px;
+  background-color: #ff7f50;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  margin-left: 35px;
+}
+
+.order-content button:hover {
+  background-color: #ff5722;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 650px) {
+  .order-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order-content {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}

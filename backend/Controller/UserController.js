@@ -1,0 +1,138 @@
+import UserModel from "../Model/UserModel.js";
+import bcrypt, { compare } from "bcrypt";
+import validator from "validator";
+import jwt from "jsonwebtoken";
+import { transporter } from "../NodeMailer.js";
+
+const createToken = (id) => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+
+
+const otpStore = new Map(); 
+
+
+const registerUser = async (req, res) => {
+  const { name, email, password } = req.body;
+
+  if (!name || !email || !password) return res.json({ success: false, message: "Missing details" });
+
+  try {
+    const existingUser = await UserModel.findOne({ email });
+    if (existingUser) return res.json({ success: false, message: "User already exists" });
+
+    if (!validator.isEmail(email)) return res.json({ success: false, message: "Invalid email" });
+    if (password.length < 8) return res.json({ success: false, message: "Password must be at least 8 chars" });
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const OTP = String(Math.floor(100000 + Math.random() * 900000));
+    const expiresAt = Date.now() + 10 * 60 * 1000; // 10 minutes
+
+    otpStore.set(email, { name, hashedPassword, otp: OTP, expiresAt });
+
+    await transporter.sendMail({
+      from: process.env.SENDERMAIL,
+      to: email,
+      subject: "Your OTP for Zestybites",
+      text: `Your OTP is ${OTP}. It expires in 10 minutes.`,
+    });
+
+    res.json({ success: true, message: "OTP sent to email. Verify to complete registration." });
+  } catch (err) {
+    res.json({ success: false, message: err.message });
+  }
+};
+
+const verifyOtp = async (req, res) => {
+  const { email, otp } = req.body;
+
+  try {
+    const temp = otpStore.get(email);
+    if (!temp) return res.json({ success: false, message: "No OTP request found" });
+
+    if (temp.otp !== otp || temp.expiresAt < Date.now()) {
+      otpStore.delete(email); // remove expired OTP
+      return res.json({ success: false, message: "Invalid or expired OTP" });
+    }
+
+    const newUser = new UserModel({
+      name: temp.name,
+      email,
+      password: temp.hashedPassword,
+      isAccountVerify: true,
+    });
+
+    await newUser.save();
+    otpStore.delete(email);
+
+    const token = createToken(newUser._id);
+    res.json({ success: true, message: "Account created successfully", token });
+  } catch (err) {
+    res.json({ success: false, message: err.message });
+  }
+};
+
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await UserModel.findOne({ email });
+    if (!user) return res.json({ success: false, message: "User doesn't exist" });
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.json({ success: false, message: "Invalid credentials" });
+
+    const token = createToken(user._id);
+    res.json({ success: true, token });
+  } catch (err) {
+    res.json({ success: false, message: err.message });
+  }
+};
+
+
+const getUser = async (req, res) => {
+   try { 
+    const token = req.headers.token;
+     if (!token) return res.json({ success: false, message: "No token provided" });
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+       const user = await UserModel.findById(decoded.id).select("name email isAccountVerify");
+         if (!user) return res.json({ success: false, message: "User does not exist" }); 
+         res.json({ success: true, user }); }
+          catch (error) { res.json({ success: false, message: error.message }); } };
+
+const adminLogin = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const admin = {
+      id: "admin123",
+      email: "kripabastola73@gmail.com",
+      password: bcrypt.hashSync("kripa@123", 10),
+    };
+    if (email !== admin.email) {
+      return res.json({
+        success: false,
+        message: "Email does not match",
+      });
+    }
+
+    const isMatch = await bcrypt.compare(password, admin.password);
+    if (!isMatch) {
+      return res.json({
+        success: false,
+        message: "Password does not match",
+      });
+    }
+
+    const token = createToken(admin.id);
+
+    res.json({
+      success: true,
+      token,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export { registerUser, verifyOtp, loginUser, getUser ,adminLogin};

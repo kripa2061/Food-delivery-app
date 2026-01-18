@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container2 {
+  background-image: url('../../assets/frontend_assets/BGREAL.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 40vw;
+  max-height: 500px;
+  min-height: 250px;
+  margin: 20px 5vw;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 30px 40px;
+ 
+}
+.content img{
+  height: 70px;
+  width:70px;
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+}
+.content {
+  color: #333333;
+  max-width: 600px;
+}
+
+.content h1 {
+  font-size: 3vw;
+  margin: 0 0 10px 0;
+}
+
+.content p {
+  font-size: 1.1vw;
+  margin: 0 0 15px 0;
+}
+
+.content button {
+  border-radius: 50px;
+  border: 1px solid white;
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  font-family: 'Poppins';
+  font-size: 1vw;
+  min-width: 120px;
+  max-width: 200px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container2 {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    padding: 20px;
+  }
+
+  .content h1 {
+    font-size: 24px;
+  }
+
+  .content p {
+    font-size: 16px;
+  }
+
+  .content button {
+    font-size: 14px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .content h1 {
+    font-size: 20px;
+  }
+
+  .content p {
+    font-size: 14px;
+  }
+
+  .content button {
+    font-size: 12px;
+  }
+}

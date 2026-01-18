@@ -1,0 +1,25 @@
+.search_container {
+  padding: 20px;
+}
+
+.search_input_wrap {
+  margin-bottom: 20px;
+}
+
+.search_input_wrap input {
+  width: 50%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.search_results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.no_results {
+  font-size: 18px;
+  color: #888;
+}

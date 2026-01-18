@@ -1,0 +1,22 @@
+.download {
+  margin: 40px 30px;
+  padding: 20px;
+  text-align: center;
+}
+
+.download h1 {
+  margin: 20px 10px;
+  padding: 20px;
+}
+
+.download .image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.download .image img {
+  width: 200px;
+}
