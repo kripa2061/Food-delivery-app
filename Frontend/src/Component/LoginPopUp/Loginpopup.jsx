@@ -3,13 +3,14 @@ import { assets } from "../../assets/frontend_assets/assets";
 import "./Loginpopup.css";
 import { storeContext } from "../../Context/Context";
 import axios from "axios";
-
+import { Eye, EyeOff } from "lucide-react";
 const LoginPopup = ({ showLogin, setShowLogin }) => {
   const { url, setToken } = useContext(storeContext);
 
+
   const [currentState, setCurrentState] = useState("signup");
   const [step, setStep] = useState("form");
-
+const[showPassword,setShowPassword]=useState(false)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -127,13 +128,19 @@ const LoginPopup = ({ showLogin, setShowLogin }) => {
               />
 
               <input
-                type="password"
+                type={showPassword?"text":"password"}
                 name="password"
                 placeholder="Password"
                 value={formData.password}
                 onChange={onChangeHandler}
                 required
               />
+              <span
+  className="toggle-password"
+  onClick={() => setShowPassword(!showPassword)}
+>
+  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+</span>
 
               <button type="submit">
                 {currentState === "signup" ? "Sign Up" : "Login"}
