@@ -10,7 +10,7 @@ const LoginPopup = ({ showLogin, setShowLogin }) => {
 
   const [currentState, setCurrentState] = useState("signup");
   const [step, setStep] = useState("form");
-const[showPassword,setShowPassword]=useState(false)
+  const [showPassword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -79,7 +79,7 @@ const[showPassword,setShowPassword]=useState(false)
         return;
       }
 
-      
+
       setToken(response.data.token);
       localStorage.setItem("token", response.data.token);
       setShowLogin(false);
@@ -128,19 +128,32 @@ const[showPassword,setShowPassword]=useState(false)
               />
 
               <input
-                type={showPassword?"text":"password"}
-                name="password"
-                placeholder="Password"
-                value={formData.password}
-                onChange={onChangeHandler}
-                required
-              />
-              <span
-  className="toggle-password"
+  type={showPassword ? "text" : "password"}
+  name="password"
+  placeholder="Password"
+  value={formData.password}
+  onChange={onChangeHandler}
+  required
+  style={{ paddingRight: "40px" }} // space for the icon
+/>
+
+<span
   onClick={() => setShowPassword(!showPassword)}
+  style={{
+    position: "absolute",
+    right: "12px",
+    top: "50%",
+    transform: "translateY(-50%)",
+    cursor: "pointer",
+  }}
 >
-  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+  <img
+    src={showPassword ? assets.show : assets.hide}
+    alt="toggle password"
+    style={{ width: "20px", height: "20px" }}
+  />
 </span>
+
 
               <button type="submit">
                 {currentState === "signup" ? "Sign Up" : "Login"}
