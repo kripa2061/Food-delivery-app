@@ -111,5 +111,18 @@ res.json({success:true,message:"Status updated"})
   res.json({success:false,message:error.message})
 }
 }
+const deleteOrder=async(req,res)=>{
+try {
+    const orderId=req.params.id;
+  const orders=await orderModel.findByIdAndDelete(orderId);
+  if(!orders){
+    res.json({success:false,message:"order not found"})
+  }else{
+     res.json({success:true,message:"order deleted"})
+  }
+} catch (error) {
+    res.json({success:false,message:error.message})
+}
+}
 
-export { placeorder,verifyOrder, userOrder,listOrders,updateStatus };
+export { placeorder,verifyOrder, userOrder,listOrders,updateStatus,deleteOrder };

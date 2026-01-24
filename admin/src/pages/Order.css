@@ -73,7 +73,11 @@
   color: #2f3640;
   font-weight: 600;
 }
+.delete{
+  
+margin-left:260px ;
 
+}
 /* Order details */
 .order-details {
   display: flex;

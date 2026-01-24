@@ -39,10 +39,7 @@ const navigate=useNavigate()
       }
     });
 
-    // if (orderItems.length === 0) {
-    //   alert("Cart is empty");
-    //   return;
-    // }
+
 
     const orderData = {
       address: data,
