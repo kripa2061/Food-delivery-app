@@ -37,3 +37,14 @@ color: tomato;
   border-bottom: 2px solid #ccc; /* you can change color */
   width: 100%;
 }
+.admin-button{
+  height: 30px;
+  width: 90px;
+  background-color: tomato;
+  border-radius: 50px;
+display:flex;
+text-align: center;
+justify-content: center;
+align-items: center;
+font-size: 14px;
+}

@@ -7,9 +7,11 @@ const Navbar = () => {
   const navigate = useNavigate(); 
 
   const handleLogout = () => {
-    localStorage.removeItem("adminToken"); 
-  window.location.href = "/sign";
+    localStorage.removeItem("adminToken");
+
+  navigate("/sign")
   };
+ 
 
   return (
     <div className="navbar-container">
@@ -27,7 +29,7 @@ const Navbar = () => {
             src={assets.profile_image}
             alt="Profile"
           />
-          <button onClick={handleLogout}>Logout</button>
+          <button className="admin-button" onClick={handleLogout}>Logout</button>
         </div>
       </div>
       <hr className="navbar-divider" />

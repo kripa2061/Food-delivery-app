@@ -5,17 +5,19 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+ 
   const url = "http://localhost:5001";
   const navigate = useNavigate();
-
+const[email,setEmail]=useState("");
+const[password,setPassword]=useState("");
   // Redirect if already logged in
-  useEffect(() => {
+ useEffect(() => {
     if (localStorage.getItem("adminToken")) {
       navigate("/add");
     }
   }, [navigate]);
+
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,6 +26,7 @@ const Login = () => {
         email,
         password,
       });
+
 
       const data = response.data;
       if (!data.success) {

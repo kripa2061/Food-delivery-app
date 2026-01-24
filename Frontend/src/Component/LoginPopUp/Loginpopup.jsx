@@ -127,32 +127,35 @@ const LoginPopup = ({ showLogin, setShowLogin }) => {
                 required
               />
 
-              <input
-  type={showPassword ? "text" : "password"}
-  name="password"
-  placeholder="Password"
-  value={formData.password}
-  onChange={onChangeHandler}
-  required
-  style={{ paddingRight: "40px" }} // space for the icon
-/>
-
-<span
-  onClick={() => setShowPassword(!showPassword)}
-  style={{
-    position: "absolute",
-    right: "12px",
-    top: "50%",
-    transform: "translateY(-50%)",
-    cursor: "pointer",
-  }}
->
-  <img
-    src={showPassword ? assets.show : assets.hide}
-    alt="toggle password"
-    style={{ width: "20px", height: "20px" }}
+              <div style={{ position: "relative" }}>
+  <input
+    type={showPassword ? "text" : "password"}
+    name="password"
+    placeholder="Password"
+    value={formData.password}
+    onChange={onChangeHandler}
+    required
+    style={{ paddingRight: "190px" }}
   />
-</span>
+
+  <span
+    onClick={() => setShowPassword(!showPassword)}
+    style={{
+      position: "absolute",
+      right: "12px",
+      top: "50%",
+      transform: "translateY(-50%)",
+      cursor: "pointer",
+    }}
+  >
+    <img
+      src={showPassword ? assets.show : assets.hide}
+      alt="toggle password"
+      style={{ width: "20px", height: "20px" }}
+    />
+  </span>
+</div>
+
 
 
               <button type="submit">

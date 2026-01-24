@@ -11,26 +11,27 @@ import AdminProtectedRoute from "./Component/AdminProtectedRoutes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import { useState } from "react";
 
 const App = () => {
   const url = "http://localhost:5001";
   const location = useLocation();
   const token = localStorage.getItem("adminToken");
 
-  // Only show Navbar & Sidebar if token exists and not on login page
+
   const showLayout = token && location.pathname !== "/sign";
 
   return (
     <div className="app-container">
-      {showLayout && <Navbar />}
+      {showLayout && <Navbar  />}
       <div className="main-content">
         {showLayout && <Sidebar />}
         <div className="page-content">
           <Routes>
-            {/* Login page: no Navbar/Sidebar */}
-            <Route path="/sign" element={<Login />} />
 
-            {/* Protected admin routes */}
+            <Route path="/sign" element={<Login  />} />
+
+
             <Route
               path="/"
               element={

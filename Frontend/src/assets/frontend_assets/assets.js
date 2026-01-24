@@ -3,6 +3,8 @@ import logo from './logo.png'
 import chilliPepper from './chilli-pepper.png'
 import header_img from './header_img.png'
 import search_icon from './search_icon.png'
+import show from './show.png'
+import hide from './hide.png'
 import menu_1 from './menu_1.png'
 import menu_2 from './menu_2.png'
 import menu_3 from './menu_3.png'
@@ -87,7 +89,9 @@ export const assets = {
     parcel_icon,
     chilliPepper,
     bot,
-    boot
+    boot,
+    show,
+    hide
 
 }
 

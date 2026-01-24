@@ -6,11 +6,11 @@ import { storeContext } from '../../Context/Context';
 import axios from 'axios';
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
-  const { cartItem,totalItems,token,setToken,url ,userData} = useContext(storeContext);
-const handleLogout=async()=>{
-  localStorage.removeItem("token")
-  setToken("");
-}
+  const { cartItem, totalItems, token, setToken, url, userData } = useContext(storeContext);
+  const handleLogout = async () => {
+    localStorage.removeItem("token")
+    setToken("");
+  }
   return (
     <div className="container">
       <div className="logo">
@@ -53,15 +53,15 @@ const handleLogout=async()=>{
             <Link to="/cart">
               <img className="basket" src={assets.basket_icon} alt="User" />
             </Link>
-            {token && totalItems  > 0 ?
+            {token && totalItems > 0 ?
               (
-                 <div className="dot">
+                <div className="dot">
                   {totalItems}
-                 </div>
-              
+                </div>
+
               ) :
               (
-                 <div></div>
+                <div></div>
               )}
 
 
@@ -69,22 +69,22 @@ const handleLogout=async()=>{
           </li>
 
           <li>
-            {!token?
-           
+            {!token ?
+
               <button className="button" onClick={() => setShowLogin(true)}>Sign in</button>
 
-            :
-            <div className='profile-dropdown'>
-              <div className='profile-icon'>
+              :
+              <div className='profile-dropdown'>
+                <div className='profile-icon'>
                   {userData && userData.name[0].toUpperCase()}
+                </div>
+                <ul>
+                  <Link to="/myorders"><li><img src={assets.parcel_icon} />Orders</li></Link>
+                  <li onClick={handleLogout}><img src={assets.logout_icon} />Logout</li>
+                </ul>
               </div>
-              <ul>
-              <Link to="/myorders"><li><img src={assets.parcel_icon}/>Orders</li></Link>
-              <li onClick={handleLogout}><img src={assets.logout_icon}/>Logout</li>
-              </ul>
-            </div>
             }
-          
+
           </li>
         </ul>
       </div>
