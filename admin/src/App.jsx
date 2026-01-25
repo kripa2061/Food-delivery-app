@@ -12,6 +12,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import { useState } from "react";
+import ListCustomer from "./pages/ListCustomer";
 
 const App = () => {
   const url = "http://localhost:5001";
@@ -23,13 +24,13 @@ const App = () => {
 
   return (
     <div className="app-container">
-      {showLayout && <Navbar  />}
+      {showLayout && <Navbar />}
       <div className="main-content">
         {showLayout && <Sidebar />}
         <div className="page-content">
           <Routes>
 
-            <Route path="/sign" element={<Login  />} />
+            <Route path="/sign" element={<Login />} />
 
 
             <Route
@@ -72,6 +73,15 @@ const App = () => {
                 </AdminProtectedRoute>
               }
             />
+            <Route
+              path="/user"
+              element={
+                <AdminProtectedRoute>
+                  <ListCustomer url={url} />
+                </AdminProtectedRoute>
+              }
+            />
+
           </Routes>
         </div>
       </div>

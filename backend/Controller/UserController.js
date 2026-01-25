@@ -135,4 +135,18 @@ const adminLogin = async (req, res) => {
   }
 };
 
-export { registerUser, verifyOtp, loginUser, getUser ,adminLogin};
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await UserModel.find().select(
+      "name email role isAccountVerify"
+    );
+
+    res.json({ success: true, data: users });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
+
+
+export { registerUser, verifyOtp, loginUser, getUser ,adminLogin,getAllUsers};

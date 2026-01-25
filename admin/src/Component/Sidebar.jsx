@@ -18,6 +18,10 @@ const Sidebar = () => {
         <img src={assets.parcel_icon} alt="Orders" />
         <p>Orders</p>
       </NavLink>
+      <NavLink to="/user" className='sidebar-item'>
+      <img src={assets.admin} alt="Customers"/>
+      <p>Customers</p>
+      </NavLink>
     </div>
   )
 }
