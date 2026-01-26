@@ -8,11 +8,11 @@
   min-height: 80vh;
 }
 
-/* Each order card as horizontal row */
+
 .order-card {
   display: flex;
   align-items: center;
-  gap: 35px;
+  gap: 55px;
   background-color: #fff;
   padding: 15px 20px;
   border-radius: 12px;
@@ -25,7 +25,7 @@
   box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 }
 
-/* Parcel image */
+
 .order-icon {
   width: 50px;
   height: 50px;
@@ -33,12 +33,11 @@
   border-radius: 8px;
 }
 
-/* Content wrapper inside card */
 .order-content {
   display: flex;
   align-items: center;
   gap: 35px;
-  flex-wrap: nowrap; /* everything stays in one row */
+  flex-wrap: nowrap; 
   flex: 1;
 }
 
@@ -49,11 +48,11 @@
   gap: 35px;
 }
 
-/* Each food item block */
+
 .food-item {
   display: flex;
   align-items: center;
-  gap: 5px; /* spacing between name, x, quantity */
+  gap: 5px; 
   background-color: #f1f1f1;
   padding: 4px 8px;
   border-radius: 6px;
@@ -67,15 +66,15 @@
   min-width: 100px;
 }
 
-/* Status */
+
 .order-status {
   font-weight: 350;
   min-width: 80px;
 }
 
-/* Status dot */
+
 .order-status span {
-  color: green; /* dynamic if needed */
+  color: rgb(11, 151, 11); 
   margin-right: 4px;
   font-size: 12px;
 }

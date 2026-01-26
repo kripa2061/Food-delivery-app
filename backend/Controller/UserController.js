@@ -134,19 +134,18 @@ const adminLogin = async (req, res) => {
     });
   }
 };
-
-const getAllUsers = async (req, res) => {
+const getAllUser = async (req, res) => {
   try {
-    const users = await UserModel.find().select(
-      "name email role isAccountVerify"
-    );
-
-    res.json({ success: true, data: users });
+    const users = await UserModel.find();
+    if (!users || users.length === 0) {
+      res.json({ success: false, message: "No users found" });
+    } else {
+      res.json({ success: true, data: users }); // send users here
+    }
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
 };
 
 
-
-export { registerUser, verifyOtp, loginUser, getUser ,adminLogin,getAllUsers};
+export { registerUser, verifyOtp, loginUser, getUser ,adminLogin,getAllUser};

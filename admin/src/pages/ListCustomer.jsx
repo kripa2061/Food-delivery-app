@@ -8,20 +8,47 @@ const ListCustomer = () => {
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const url = "http://localhost:5001";
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Fetch customer list
+  const adminToken = localStorage.getItem("adminToken");
+  const userToken = localStorage.getItem("userToken");
+  const token = adminToken || userToken;
+
+  const isAdmin = !!adminToken;
+  const url = "http://localhost:5001";
+
   const fetchList = async () => {
+    if (!token) {
+      toast.error("Not authorized");
+      return;
+    }
+
     try {
       setLoading(true);
-      const response = await axios.get(`${url}/api/user/get`);
 
-      if (response.data.success) {
-        setList(response.data.data);
+      let response;
+
+      if (isAdmin) {
+        response = await axios.get(`${url}/api/user/getUser`, {
+          headers: { token },
+        });
+
+        if (response.data.success) {
+          setList(response.data.data);
+        } else {
+          toast.error(response.data.message);
+        }
       } else {
-        toast.error(response.data.message);
+        response = await axios.get(`${url}/api/user/get`, {
+          headers: { token },
+        });
+
+        if (response.data.success) {
+          setList([response.data.user]);
+        } else {
+          toast.error(response.data.message);
+        }
       }
     } catch (error) {
       toast.error("Failed to fetch customers");
@@ -30,15 +57,16 @@ const ListCustomer = () => {
     }
   };
 
-  // Delete customer
   const removeItem = async (userId) => {
     try {
-      const response = await axios.post(`${url}/api/user/delete`, {
-        id: userId,
-      });
+      const response = await axios.post(
+        `${url}/api/user/delete`,
+        { id: userId },
+        { headers: { token } }
+      );
 
       if (response.data.success) {
-        toast.success("Customer deleted successfully");
+        toast.success("Customer deleted");
         fetchList();
       } else {
         toast.error(response.data.message);
@@ -48,7 +76,6 @@ const ListCustomer = () => {
     }
   };
 
-  // Refetch list when route changes
   useEffect(() => {
     fetchList();
   }, [location]);
@@ -61,21 +88,31 @@ const ListCustomer = () => {
         <b>ID</b>
         <b>Name</b>
         <b>Email</b>
+        <b >Registerd Date</b>
         <b>Actions</b>
       </div>
 
-      {loading && <p>Loading customers...</p>}
+      {loading && <p>Loading...</p>}
 
-      {!loading && list.length === 0 && (
-        <p>No customers found</p>
-      )}
+      {!loading && list.length === 0 && <p>No customers found</p>}
 
       {!loading &&
         list.map((item) => (
           <div key={item._id} className="list-row">
-            <p>{item._id}</p>
+      <p>{item._id.slice(0, 6)}</p>
+
             <p>{item.name}</p>
             <p>{item.email}</p>
+<p>
+  {item.createdAt
+    ? new Date(item.createdAt).toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      })
+    : "—"}
+</p>
+
 
             <div className="action-buttons">
               <button
@@ -85,12 +122,14 @@ const ListCustomer = () => {
                 Edit
               </button>
 
-              <button
-                className="delete-btn"
-                onClick={() => removeItem(item._id)}
-              >
-                Delete
-              </button>
+              {isAdmin && (
+                <button
+                  className="delete-btn"
+                  onClick={() => removeItem(item._id)}
+                >
+                  Delete
+                </button>
+              )}
             </div>
           </div>
         ))}

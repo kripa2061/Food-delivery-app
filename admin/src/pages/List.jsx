@@ -44,6 +44,7 @@ const List = () => {
 
   return (
     <div className="list-container">
+      <h2>Food List</h2>
       <div className="list-header">
         <b>Image</b>
         <b>Name</b>

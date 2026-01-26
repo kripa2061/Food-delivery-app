@@ -34,9 +34,9 @@ useEffect(()=>{
               <div className="cart-item-display" key={item._id}>
                 <img src={url+"/uploads/"+item.image} />
                 <p>{item.name}</p>
-                <p>${item.price}</p>
+                <p>Rs.{item.price}</p>
                 <p>{cartItem[item._id]}</p>
-                <p>${item.price * cartItem[item._id]}</p>
+                <p>Rs.{item.price * cartItem[item._id]}</p>
                 <p onClick={() => RemoveFromCart(item._id)}>⛌</p>
               </div>
             )
@@ -48,32 +48,24 @@ useEffect(()=>{
         <div className="cart-buttom">
           <div className="subtotal">
             <p>Subtotal</p>
-            <p>${getTotal()}</p>
+            <p>Rs.{getTotal()}</p>
           </div>
 
           <div className="delivery">
             <p>Delivery Fee</p>
-            <p>${getTotal() === 0 ? 0 : 2}</p>
+            <p>Rs.{getTotal() === 0 ? 0 : 200}</p>
           </div>
 
           <div className="total">
             <p>Total</p>
-            <p>${getTotal() === 0 ? 0 : getTotal() + 2}</p>
+            <p>Rs.{getTotal() === 0 ? 0 : getTotal() + 200}</p>
           </div>
 
           <button onClick={() => navigate('/order')}>Proceed to Checkout</button>
         </div>
       </div>
 
-      <div className="cart-promocode">
-        <div>
-          <p>If you have a promo code, enter it here</p>
-          <div className="cart-promocode-input">
-            <input type="text" placeholder="Promo code" />
-            <button>Submit</button>
-          </div>
-        </div>
-      </div>
+    
     </div>
   )
 }

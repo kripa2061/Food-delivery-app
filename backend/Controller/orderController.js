@@ -2,7 +2,7 @@ import orderModel from "../Model/OrderModel.js";
 import userModel from "../Model/UserModel.js";
 import Stripe from "stripe";
 import dotenv from "dotenv";
-import { response } from "express";
+
 
 dotenv.config();
 
@@ -99,7 +99,7 @@ const listOrders=async(req,res)=>{
   const orders=await orderModel.find({});
   res.json({success:true,data:orders});
  } catch (error) {
-  response.json({success:false,message:error.message});
+  res.json({success:false,message:error.message});
  }
 }
 //updating order status
