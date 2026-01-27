@@ -32,46 +32,51 @@ const Login = () => {
   };
 
   return (
+    <>
+    <h3 className="title">Admin Login</h3>
+ 
     <div className="login-page">
-      {/* Left side illustration */}
-      <div className="login-left">
-        <img src={assets.foodLogin} alt="Food Delivery" />
-      </div>
+      
+  <div className="login-card">
+    {/* Left side image */}
+    <div className="login-left">
+      <img src={assets.login} alt="Food Delivery" />
+    </div>
 
-      {/* Right side login form */}
-      <div className="login-right">
-        <div className="login-card">
-          <h2>Welcome Back!</h2>
-          <p>Login to manage your orders</p>
-          <form onSubmit={handleSubmit}>
-            <div className="input-group">
-              <i className="fa fa-envelope"></i>
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-            <div className="input-group">
-              <i className="fa fa-lock"></i>
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            <button type="submit">Login</button>
-            <p className="forgot">
-              <a href="/forgot">Forgot Password?</a>
-            </p>
-          </form>
-        </div>
+    {/* Right side login form */}
+    <div className="login-right">
+      <div>
+        <h2>Welcome Back!</h2>
+        <p>Login to manage your orders</p>
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <i className="fa fa-envelope"></i>
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <i className="fa fa-lock"></i>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit">Login</button>
+         
+        </form>
       </div>
     </div>
+  </div>
+</div>
+   </>
   );
 };
 

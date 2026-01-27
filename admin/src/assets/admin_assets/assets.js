@@ -6,7 +6,7 @@ import upload_area from './upload_area.png';
 import parcel_icon from './parcel_icon.png';
 import item from './item.png';
 import admin from './afmin.jpg';
-
+import login from './Login.jpeg'
 export const assets = {
     logo,
     add_icon,
@@ -15,5 +15,6 @@ export const assets = {
     upload_area,
     parcel_icon,
   item,
-  admin
+  admin,
+  login
 };
