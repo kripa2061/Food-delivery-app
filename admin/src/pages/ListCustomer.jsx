@@ -115,12 +115,7 @@ const ListCustomer = () => {
 
 
             <div className="action-buttons">
-              <button
-                className="edit-btn"
-                onClick={() => navigate(`/edit/${item._id}`)}
-              >
-                Edit
-              </button>
+          
 
               {isAdmin && (
                 <button

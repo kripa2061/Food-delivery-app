@@ -19,7 +19,8 @@ const foodSchema=new mongoose.Schema({
       category:{
         type:String,
         required:true
-    }
+    },
+      isActive: { type: Boolean, default: true }
 })
 const foodModel=mongoose.models.food||mongoose.model("food",foodSchema)
 export default foodModel;

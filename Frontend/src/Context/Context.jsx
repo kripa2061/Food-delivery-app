@@ -46,10 +46,14 @@ const getUserData = async () => {
   };
 
   // Add/remove items
-  const AddToCart = async (itemId) => {
-    setCartItem(prev => ({ ...prev, [itemId]: (prev[itemId] || 0) + 1 }));
-    if (token) await axios.post(url + "/api/cart/add", { itemId }, { headers: { token } });
-  };
+const AddToCart = async (itemId) => {
+  setCartItem(prev => {
+    const currentQty = prev[itemId] ?? 0; 
+    return { ...prev, [itemId]: currentQty + 1 };
+  });
+  if (token) await axios.post(url + "/api/cart/add", { itemId, userId: userData._id }, { headers: { token } });
+};
+
 
   const RemoveFromCart = async (itemId) => {
     setCartItem(prev => {

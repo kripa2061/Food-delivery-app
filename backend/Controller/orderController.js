@@ -16,7 +16,7 @@ const placeorder = async (req, res) => {
   try {
     const { userId, items, amount, address } = req.body;
 
-    // ✅ CRITICAL FIX: block empty cart
+
     if (!items || items.length === 0) {
       return res.json({
         success: false,

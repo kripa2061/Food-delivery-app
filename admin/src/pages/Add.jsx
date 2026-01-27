@@ -97,7 +97,7 @@ const Add = () => {
                         value={data.description}
                         onChange={onChangeHandler}
                         placeholder="Enter description"
-                        style={{ height: '150px' }}
+                        style={{ height: '120px' }}
                         required
                     />
                 </div>

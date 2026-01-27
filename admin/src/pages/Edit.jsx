@@ -104,7 +104,7 @@ const Edit = () => {
             value={data.description}
             onChange={onChangeHandler}
             placeholder="Enter description"
-            style={{ height: "150px" }}
+            style={{ height: "100px" }}
             required
           />
         </div>

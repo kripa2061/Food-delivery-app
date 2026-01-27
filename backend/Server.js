@@ -11,6 +11,8 @@ import UserRouter from "./Routes/UserRoute.js";
 import orderRouter from "./Routes/orderRoute.js";
 import path from "path";
 import cartRouter from "./Routes/CartRoute.js";
+
+import adminRouter from './Routes/adminRoute.js';
 console.log("SMTPUSER:", process.env.SMTPUSER); // should print the username
 console.log("SMTPPASS:", process.env.SMTPPASS);
 const app = express();
@@ -28,6 +30,7 @@ app.use("/api/food", foodRouter);
 app.use("/api/user", UserRouter);
 app.use("/api/order", orderRouter);
 app.use("/api/cart",cartRouter);
+app.use("/api/admin",adminRouter)
 
 app.get("/", (req, res) => {
   res.send("API working");

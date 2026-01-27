@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import { useState } from "react";
 import ListCustomer from "./pages/ListCustomer";
+import Dashboard from "./pages/Dashboard";
 
 const App = () => {
   const url = "http://localhost:5001";
@@ -35,6 +36,14 @@ const App = () => {
 
             <Route
               path="/"
+              element={
+                <AdminProtectedRoute>
+                  <Dashboard />
+                </AdminProtectedRoute>
+              }
+            />
+            <Route
+              path="/add"
               element={
                 <AdminProtectedRoute>
                   <Add />

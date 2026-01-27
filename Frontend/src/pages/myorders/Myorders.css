@@ -1,110 +1,160 @@
-/* Container for all orders */
-.myorders {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  padding: 20px;
-  background-color: #f9f9f9;
+/* Wrapper and title */
+.myorders-wrapper {
+  padding: 20px 40px; /* reduced padding for better spacing */
+  background-color: #f7f8fa;
   min-height: 80vh;
 }
 
+.myorders-title {
+  font-size: 25px;
+  font-weight: 800;
+  color: #333;
+  margin-bottom: 20px;
+}
 
+/* Container for orders */
+.myorders {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex-wrap: wrap; /* allow multiple rows if many cards */
+  justify-content: flex-start;
+}
+
+/* Message if no orders */
+.no-orders {
+  font-size: 16px;
+  color: #777;
+}
+
+/* Order card */
 .order-card {
   display: flex;
-  align-items: center;
-  gap: 55px;
+  align-items: flex-start;
+  gap: 16px;
   background-color: #fff;
-  padding: 15px 20px;
+  padding: 20px 10px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
   transition: transform 0.2s, box-shadow 0.2s;
+  flex: 1 1 300px; /* allow flexible width but minimum of 300px */
+  max-width: 450px;
+  flex-wrap: wrap; /* wrap content inside card if needed */
 }
 
 .order-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
 }
 
-
+/* Order icon */
 .order-icon {
   width: 50px;
   height: 50px;
   object-fit: contain;
-  border-radius: 8px;
 }
 
+/* Order content */
 .order-content {
   display: flex;
-  align-items: center;
-  gap: 35px;
-  flex-wrap: nowrap; 
+  flex-direction: column;
+  gap: 20px;
   flex: 1;
+  min-width: 0; /* prevents text overflow */
 }
 
-/* Horizontal items */
+/* Items container */
 .order-items {
   display: flex;
-  align-items: center;
-  gap: 35px;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-
+/* Single food item */
 .food-item {
-  display: flex;
-  align-items: center;
-  gap: 5px; 
-  background-color: #f1f1f1;
-  padding: 4px 8px;
-  border-radius: 6px;
+  background-color: #eef2f5;
+  padding: 4px 10px;
+  border-radius: 8px;
   font-size: 13px;
+  color: #333;
+  font-weight: 500;
+  white-space: nowrap; /* keeps item text in one line */
 }
 
-/* Amount */
+/* Total amount */
 .order-amount {
   font-weight: 600;
-  color: #333;
-  min-width: 100px;
+  color: #111;
+  font-size: 15px;
 }
 
-
+/* Status */
 .order-status {
-  font-weight: 350;
-  min-width: 80px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  font-size: 14px;
+  color: green;
 }
-
 
 .order-status span {
-  color: rgb(11, 151, 11); 
-  margin-right: 4px;
   font-size: 12px;
 }
 
-/* Track button */
+.order-status.completed span { color: green; }
+.order-status.pending span { color: orange; }
+.order-status.cancelled span { color: red; }
+
+/* Button */
 .order-content button {
-  padding: 6px 12px;
+  padding: 8px 14px;
   background-color: #ff7f50;
   color: #fff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 500;
+  width: max-content;
   transition: background-color 0.2s;
-  margin-left: 35px;
 }
 
 .order-content button:hover {
   background-color: #ff5722;
 }
 
-/* Responsive for smaller screens */
-@media (max-width: 650px) {
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .myorders-wrapper {
+    padding: 15px 20px;
+  }
+
   .order-card {
     flex-direction: column;
     align-items: flex-start;
+    padding: 15px 20px;
   }
 
-  .order-content {
-    flex-wrap: wrap;
-    gap: 10px;
+  .order-items {
+    gap: 6px;
+  }
+}
+
+@media (max-width: 650px) {
+  .order-card {
+    padding: 12px 15px;
+  }
+
+  .food-item {
+    font-size: 12px;
+    padding: 3px 8px;
+  }
+
+  .order-amount {
+    font-size: 14px;
+  }
+
+  .order-status {
+    font-size: 13px;
   }
 }
