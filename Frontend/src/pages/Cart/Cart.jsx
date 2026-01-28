@@ -1,24 +1,32 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react';
 import { storeContext } from '../../Context/Context';
-import { food_list } from '../../assets/frontend_assets/assets';
-import './Cart.css'
+import './Cart.css';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-
 const Cart = () => {
-     
-  const { AddToCart, RemoveFromCart, cartItem, getTotal ,url,foodList,token} = useContext(storeContext);
+
+  const { RemoveFromCart, cartItem, getTotal, url, foodList, token } =
+    useContext(storeContext);
+
   const navigate = useNavigate();
-useEffect(()=>{
-  if(!token){
-    navigate("/")
-    toast.error("Please Login first")
-  }
-},[token])
-const handlecheckOut=async(req,res)=>{
-  
-}
+
+  useEffect(() => {
+    if (!token) {
+      toast.error("Please login first");
+      navigate("/");
+    }
+  }, [token, navigate]);
+
+  const handlecheckOut = () => {
+    if (getTotal() > 0) {
+      navigate('/order');
+    } else {
+      toast.error("Cart is empty");
+      navigate('/');
+    }
+  };
+
   return (
     <div>
       <div className="cart">
@@ -35,15 +43,19 @@ const handlecheckOut=async(req,res)=>{
           if (cartItem[item._id] > 0) {
             return (
               <div className="cart-item-display" key={item._id}>
-                <img src={url+"/uploads/"+item.image} />
+                <img
+                  src={url + "/uploads/" + item.image}
+                  alt={item.name}
+                />
                 <p>{item.name}</p>
                 <p>Rs.{item.price}</p>
                 <p>{cartItem[item._id]}</p>
                 <p>Rs.{item.price * cartItem[item._id]}</p>
                 <p onClick={() => RemoveFromCart(item._id)}>⛌</p>
               </div>
-            )
+            );
           }
+          return null;
         })}
       </div>
 
@@ -64,13 +76,13 @@ const handlecheckOut=async(req,res)=>{
             <p>Rs.{getTotal() === 0 ? 0 : getTotal() + 200}</p>
           </div>
 
-          <button onClick={() => navigate('/order')}>Proceed to Checkout</button>
+          <button onClick={handlecheckOut}>
+            Proceed to Checkout
+          </button>
         </div>
       </div>
-
-    
     </div>
-  )
-}
+  );
+};
 
 export default Cart;
