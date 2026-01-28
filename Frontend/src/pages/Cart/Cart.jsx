@@ -16,6 +16,9 @@ useEffect(()=>{
     toast.error("Please Login first")
   }
 },[token])
+const handlecheckOut=async(req,res)=>{
+  
+}
   return (
     <div>
       <div className="cart">
