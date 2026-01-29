@@ -107,6 +107,7 @@ const Order = ({ url }) => {
               <div className="order-details">
                 <span>Items: {orderItem.items.length}</span>
                 <span>Rs. {orderItem.amount}</span>
+                <span>{orderItem.ispaid}</span>
               </div>
 
               <select
