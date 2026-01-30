@@ -16,7 +16,9 @@ const LoginPopup = ({ showLogin, setShowLogin }) => {
     email: "",
     password: "",
   });
+const  passwordCheck=async()=>{
 
+}
   const [otp, setOtp] = useState("");
 
   useEffect(() => {
