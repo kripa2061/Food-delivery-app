@@ -21,6 +21,15 @@ const registerUser = async (req, res) => {
 
     if (!validator.isEmail(email)) return res.json({ success: false, message: "Invalid email" });
     if (password.length < 8) return res.json({ success: false, message: "Password must be at least 8 chars" });
+const passwordRegex =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+if (!passwordRegex.test(password)) {
+  return res.status(400).json({
+    message:
+      "Password must contain uppercase, lowercase, number, special character and be at least 8 characters long"
+  });
+}
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const OTP = String(Math.floor(100000 + Math.random() * 900000));

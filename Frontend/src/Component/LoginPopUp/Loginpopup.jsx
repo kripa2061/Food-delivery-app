@@ -4,38 +4,60 @@ import "./Loginpopup.css";
 import { storeContext } from "../../Context/Context";
 import axios from "axios";
 import { Eye, EyeOff } from "lucide-react";
+
 const LoginPopup = ({ showLogin, setShowLogin }) => {
   const { url, setToken } = useContext(storeContext);
 
-
   const [currentState, setCurrentState] = useState("signup");
   const [step, setStep] = useState("form");
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
-const  passwordCheck=async()=>{
 
-}
+  const [passwordError, setPasswordError] = useState("");
   const [otp, setOtp] = useState("");
+
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
 
   useEffect(() => {
     setStep("form");
     setOtp("");
+    setPasswordError("");
   }, [currentState, showLogin]);
 
   const onChangeHandler = (e) => {
+    const { name, value } = e.target;
+
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
-  };
 
+    // Frontend password validation (signup only)
+    if (name === "password" && currentState === "signup") {
+      if (!passwordRegex.test(value)) {
+        setPasswordError(
+          "Password must contain uppercase, lowercase, number, special character & minimum 8 characters"
+        );
+      } else {
+        setPasswordError("");
+      }
+    }
+  };
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
+
+    // Block signup if password invalid
+    if (currentState === "signup" && passwordError) {
+      alert("Please fix password requirements");
+      return;
+    }
 
     try {
       const endpoint =
@@ -68,9 +90,6 @@ const  passwordCheck=async()=>{
     e.preventDefault();
 
     try {
-      console.log("EMAIL:", formData.email);
-      console.log("OTP:", otp);
-
       const response = await axios.post(url + "/api/user/verify-otp", {
         email: formData.email,
         otp,
@@ -81,13 +100,10 @@ const  passwordCheck=async()=>{
         return;
       }
 
-
       setToken(response.data.token);
       localStorage.setItem("token", response.data.token);
       setShowLogin(false);
-
     } catch (err) {
-      console.error(err);
       alert("OTP verification failed");
     }
   };
@@ -130,35 +146,45 @@ const  passwordCheck=async()=>{
               />
 
               <div style={{ position: "relative" }}>
-  <input
-    type={showPassword ? "text" : "password"}
-    name="password"
-    placeholder="Password"
-    value={formData.password}
-    onChange={onChangeHandler}
-    required
-    style={{ paddingRight: "190px" }}
-  />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={onChangeHandler}
+                  required
+                  style={{ paddingRight: "190px" }}
+                />
 
-  <span
-    onClick={() => setShowPassword(!showPassword)}
-    style={{
-      position: "absolute",
-      right: "12px",
-      top: "50%",
-      transform: "translateY(-50%)",
-      cursor: "pointer",
-    }}
-  >
-    <img
-      src={showPassword ? assets.show : assets.hide}
-      alt="toggle password"
-      style={{ width: "20px", height: "20px" }}
-    />
-  </span>
-</div>
+                <span
+                  onClick={() => setShowPassword(!showPassword)}
+                  style={{
+                    position: "absolute",
+                    right: "12px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    cursor: "pointer",
+                  }}
+                >
+                  <img
+                    src={showPassword ? assets.show : assets.hide}
+                    alt="toggle password"
+                    style={{ width: "20px", height: "20px" }}
+                  />
+                </span>
+              </div>
 
-
+              {passwordError && currentState === "signup" && (
+                <p
+                  style={{
+                    color: "red",
+                    fontSize: "12px",
+                    marginTop: "6px",
+                  }}
+                >
+                  {passwordError}
+                </p>
+              )}
 
               <button type="submit">
                 {currentState === "signup" ? "Sign Up" : "Login"}
